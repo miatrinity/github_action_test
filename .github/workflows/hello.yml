@@ -36,7 +36,11 @@ jobs:
     if: always()
     steps:
       - uses: technote-space/workflow-conclusion-action@v2
-      - name: Railsnew.io pinging will happen here!
-        run: echo Pinging Railsnew.io!!!!
+      - name: ping Railsnew.io
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: "http://b9f1837a6daf.ngrok.io/admin/verification_runs/$GITHUB_REPOSITORY?status=${{ env.WORKFLOW_CONCLUSION }}"
+          method: 'PUT'
+          bearerToken: ${{ secrets.RAILS_NEW_IO_TOKEN }}
     
   
